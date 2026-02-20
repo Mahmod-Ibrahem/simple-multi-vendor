@@ -70,4 +70,9 @@ class HomeController extends Controller
 
         return redirect()->back()->with('error', 'رقم الهاتف غير متاح للتواصل.');
     }
+
+    public function intro()
+    {
+        return view('intro');
+    }
 }
