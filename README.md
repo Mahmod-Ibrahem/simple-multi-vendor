@@ -1,58 +1,54 @@
-# Letter Management System
+# Simple Multi-Vendor System (أركان الأسرة)
 
-A comprehensive digital solution for managing organizational correspondence, tracking workflows, and archiving documents.
+A comprehensive digital platform designed to support productive families by providing a modern marketplace to showcase and sell their products directly to customers.
 
 ## 🚀 Key Features
 
-### 📨 Correspondence Management
+### 🛍️ Product & Vendor Management
 
-- **Central Registry:** Dedicated tracking for **Incoming (الوارد)** and **Outgoing (الصادر)** letters with automated numbering.
-- **Advanced Workflow:**
-    - **Assignments:** Route letters to specific Departments and Employees.
-    - **Deadlines:** Set reply deadlines and monitor Late Letters.
-    - **Status Tracking:** Real-time progress monitoring (New, In Progress, Replied).
-- **Digital Archive:**
-    - **Attachments:** Multi-file support (PDF, Images) with direct preview.
-    - **Linked Correspondence:** Chain related letters (Parent/Child threads).
+- **Vendor Stores:** Dedicated profile pages for each vendor (productive family) displaying their unique products, logo, and brief description.
+- **Product Catalog:** Easily manage products with multiple images, detailed descriptions, categories, and pricing.
+- **Direct Communication:** Seamless WhatsApp integration allowing customers to contact vendors directly for purchases or inquiries.
+- **Engagement Tracking:** Automatically track product page views and WhatsApp engagement clicks.
 
-### 📊 Dashboard & Reports
+### 🌐 Customer Experience
 
-- **Interactive Statistics:** Real-time charts for letter status and category distribution.
-- **Late Letters Alert:** Immediate visibility of overdue correspondence.
-- **Exports:** High-quality PDF and Excel reports.
+- **Responsive Design:** A fully responsive, premium user interface built with Blade featuring Arabic (RTL) support.
+- **Marketplace Browsing:** Easy navigation through product categories and individual vendor stores.
+- **Detailed Product Views:** Comprehensive product pages featuring image galleries, pricing, and related vendor information.
 
 ### ⚙️ Administration
 
-- **Role-Based Access Control (RBAC):** Secure access for Admins and Employees.
-- **Dynamic Settings:** Manage Categories, Subjects, and Letter Statuses.
+- **Role-Based Access Control (RBAC):** Secure access for System Administrators and Vendors using Spatie Permissions.
+- **Dashboard:** Centralized control panel for managing users, products, categories, roles, and system settings.
+- **Profile Management:** Vendors can update their details, logos, and business descriptions seamlessly.
 
 ## 🛠️ Tech Stack
 
-### Backend
+### Application Stack
 
 - **Framework**: [Laravel 12.x](https://laravel.com)
-- **Features**: Spatie Permission (RBAC), Excel/PDF Exports, Arabic Support.
-
-### Frontend
-
-- **Framework**: [Vue 3](https://vuejs.org/)
-- **UI & Styling**: PrimeVue 4, Tailwind CSS 4
-- **State**: Pinia
+- **Features**: Spatie Permission (RBAC), Authentication, Image Uploads, Arabic Localization (RTL).
+- **Frontend Engine**: Laravel Blade, Custom CSS, JavaScript.
 
 ## 📦 Getting Started
 
 ### Quick Setup
 
 ```bash
-#  Backend Setup
+# Application Setup
 composer install
-php artisan migrate
-php artisan key:generate
-php artisan storage:link
-php artisan serve
+cp .env.example .env
 
-# Frontend Setup
-cd frontend
-npm install
-npm run dev
+# Generate Application Key
+php artisan key:generate
+
+# Run Migrations & Seeders (to populate Roles, Admins, etc.)
+php artisan migrate --seed
+
+# Create storage link for images
+php artisan storage:link
+
+# Start the application
+php artisan serve
 ```
