@@ -6,10 +6,11 @@ use App\Traits\HasModelHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Category extends Model
 {
-    use HasFactory, HasModelHelpers;
+    use HasFactory, HasModelHelpers, Sluggable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,16 +19,32 @@ class Category extends Model
      */
     protected $fillable = [
         'title',
+        'slug',
     ];
 
     /**
-     * Get all letters for this category.
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
+
+
+    /**
+     * Get all products for this category.
      *
      * @return HasMany
      */
-    public function letters(): HasMany
+    public function products(): HasMany
     {
-        return $this->hasMany(Letter::class);
+        return $this->hasMany(Product::class);
     }
 
     /**

@@ -16,10 +16,7 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             AdminUserSeeder::class,
             CategorySeeder::class,
-            SubjectSeeder::class,
-            AssignmentSeeder::class,
-            LetterStatusSeeder::class, // Must run before LetterSeeder
-            LetterSeeder::class,
+            ProductSeeder::class,
             SettingSeeder::class,
         ]);
     }

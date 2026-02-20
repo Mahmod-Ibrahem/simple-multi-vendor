@@ -21,7 +21,6 @@ class PermissionSeeder extends Seeder
             // Dashboard permissions - صلاحيات لوحة التحكم
             ['name' => 'dashboard.view', 'name_ar' => 'عرض لوحة التحكم'],
             ['name' => 'dashboard.statistics', 'name_ar' => 'عرض الإحصائيات'],
-            ['name' => 'dashboard.calendar', 'name_ar' => 'عرض التقويم'],
 
             // User Management permissions - صلاحيات إدارة المستخدمين
             ['name' => 'users.view-any', 'name_ar' => 'عرض جميع المستخدمين'],
@@ -31,13 +30,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'users.toggle-active', 'name_ar' => 'تفعيل/تعطيل مستخدم'],
             ['name' => 'users.delete', 'name_ar' => 'حذف مستخدم'],
 
-            // Letters permissions - صلاحيات الكتب
-            ['name' => 'letters.view-any', 'name_ar' => 'عرض جميع الكتب'],
-            ['name' => 'letters.view', 'name_ar' => 'عرض كتاب'],
-            ['name' => 'letters.create', 'name_ar' => 'إنشاء كتاب'],
-            ['name' => 'letters.update', 'name_ar' => 'تعديل كتاب'],
-            ['name' => 'letters.delete', 'name_ar' => 'حذف كتاب'],
-            ['name' => 'letters.statistics', 'name_ar' => 'إحصائيات الكتب'],
+            // Products permissions - صلاحيات المنتجات
+            ['name' => 'products.view-any', 'name_ar' => 'عرض جميع المنتجات'],
+            ['name' => 'products.view', 'name_ar' => 'عرض منتج'],
+            ['name' => 'products.create', 'name_ar' => 'إنشاء منتج'],
+            ['name' => 'products.update', 'name_ar' => 'تعديل منتج'],
+            ['name' => 'products.delete', 'name_ar' => 'حذف منتج'],
 
             // Categories permissions - صلاحيات التصنيفات
             ['name' => 'categories.view-any', 'name_ar' => 'عرض جميع التصنيفات'],
@@ -45,35 +43,6 @@ class PermissionSeeder extends Seeder
             ['name' => 'categories.create', 'name_ar' => 'إنشاء تصنيف'],
             ['name' => 'categories.update', 'name_ar' => 'تعديل تصنيف'],
             ['name' => 'categories.delete', 'name_ar' => 'حذف تصنيف'],
-
-            // Subjects permissions - صلاحيات المواضيع
-            ['name' => 'subjects.view-any', 'name_ar' => 'عرض جميع المواضيع'],
-            ['name' => 'subjects.view', 'name_ar' => 'عرض موضوع'],
-            ['name' => 'subjects.create', 'name_ar' => 'إنشاء موضوع'],
-            ['name' => 'subjects.update', 'name_ar' => 'تعديل موضوع'],
-            ['name' => 'subjects.delete', 'name_ar' => 'حذف موضوع'],
-
-            // Assignments permissions - صلاحيات التكليفات
-            ['name' => 'assignments.view-any', 'name_ar' => 'عرض جميع التكليفات'],
-            ['name' => 'assignments.view', 'name_ar' => 'عرض تكليف'],
-            ['name' => 'assignments.create', 'name_ar' => 'إنشاء تكليف'],
-            ['name' => 'assignments.update', 'name_ar' => 'تعديل تكليف'],
-            ['name' => 'assignments.delete', 'name_ar' => 'حذف تكليف'],
-
-            // Employees permissions - صلاحيات الموظفين
-            ['name' => 'employees.view-any', 'name_ar' => 'عرض جميع الموظفين'],
-            ['name' => 'employees.view', 'name_ar' => 'عرض موظف'],
-            ['name' => 'employees.create', 'name_ar' => 'إنشاء موظف'],
-            ['name' => 'employees.update', 'name_ar' => 'تعديل موظف'],
-            ['name' => 'employees.delete', 'name_ar' => 'حذف موظف'],
-
-            // Letter Statuses permissions - صلاحيات حالات الكتب
-            ['name' => 'letter-statuses.view-any', 'name_ar' => 'عرض جميع حالات الكتب'],
-            ['name' => 'letter-statuses.view', 'name_ar' => 'عرض حالة كتاب'],
-            ['name' => 'letter-statuses.create', 'name_ar' => 'إنشاء حالة كتاب'],
-            ['name' => 'letter-statuses.update', 'name_ar' => 'تعديل حالة كتاب'],
-            ['name' => 'letter-statuses.delete', 'name_ar' => 'حذف حالة كتاب'],
-
 
             // RBAC permissions (Super Admin only) - صلاحيات الأدوار والصلاحيات
             ['name' => 'roles.view-any', 'name_ar' => 'عرض جميع الأدوار'],
@@ -89,12 +58,12 @@ class PermissionSeeder extends Seeder
             ['name' => 'permissions.delete', 'name_ar' => 'حذف صلاحية'],
         ];
 
-        // Create all permissions with 'api' guard
+        // Create all permissions with 'web' guard
         foreach ($permissions as $permissionData) {
             Permission::updateOrCreate(
                 [
                     'name' => $permissionData['name'],
-                    'guard_name' => 'api'
+                    'guard_name' => 'web'
                 ],
                 [
                     'name_ar' => $permissionData['name_ar']
@@ -113,44 +82,21 @@ class PermissionSeeder extends Seeder
         return [
             'dashboard.view',
             'dashboard.statistics',
-            'dashboard.calendar',
             'users.view-any',
             'users.view',
             'users.create',
             'users.update',
             'users.toggle-active',
-            'letters.view-any',
-            'letters.view',
-            'letters.create',
-            'letters.update',
-            'letters.delete',
-            'letters.statistics',
+            'products.view-any',
+            'products.view',
+            'products.create',
+            'products.update',
+            'products.delete',
             'categories.view-any',
             'categories.view',
             'categories.create',
             'categories.update',
             'categories.delete',
-            'subjects.view-any',
-            'subjects.view',
-            'subjects.create',
-            'subjects.update',
-            'subjects.delete',
-            'assignments.view-any',
-            'assignments.view',
-            'assignments.create',
-            'assignments.update',
-            'assignments.delete',
-            'employees.view-any',
-            'employees.view',
-            'employees.create',
-            'employees.update',
-            'employees.delete',
-            'letter-statuses.view-any',
-            'letter-statuses.view',
-            'letter-statuses.create',
-            'letter-statuses.update',
-            'letter-statuses.delete',
-
             'roles.view-any',
             'roles.view',
             'roles.create',

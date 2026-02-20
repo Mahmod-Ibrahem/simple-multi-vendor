@@ -19,9 +19,11 @@ class CategorySeeder extends Seeder
         \Illuminate\Support\Facades\Schema::enableForeignKeyConstraints();
 
         $categories = [
-            ['title' => 'كـتـب مـجـلـس الـوزراء'],
-            ['title' => 'كـتـب مـجـلـس الـنـواب'],
-            ['title' => 'كـتـب النـزاهـة'],
+            ['title' => ' مأكولات'],
+            ['title' => 'حرف يدوية'],
+            ['title' => 'تصاميم'],
+            ['title' => 'أخري'],
+
         ];
 
         foreach ($categories as $cat) {

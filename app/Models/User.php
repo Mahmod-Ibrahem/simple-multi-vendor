@@ -5,19 +5,21 @@ namespace App\Models;
 use App\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Cviebrock\EloquentSluggable\Sluggable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, HasApiTokens, HasRoles, Filterable;
+    use HasFactory, Notifiable, HasRoles, Filterable, Sluggable;
 
     /**
      * Guard name for Spatie permissions
      */
-    protected $guard_name = 'api';
+    protected $guard_name = 'web';
 
     /**
      * The attributes that are mass assignable.
@@ -26,9 +28,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'slug',
         'email',
         'password',
         'is_active',
+        'logo',
+        'phone',
+        'brief_description',
     ];
 
     /**
@@ -78,5 +84,47 @@ class User extends Authenticatable
     public function isClient(): bool
     {
         return $this->hasRole('عميل');
+    }
+
+    /**
+     * Get all products for this user.
+     *
+     * @return HasMany
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
+
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    /**
+     * Send the email verification notification.
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify(new \App\Notifications\CustomVerifyEmail);
     }
 }

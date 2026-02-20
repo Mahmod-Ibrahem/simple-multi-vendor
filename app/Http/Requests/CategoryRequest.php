@@ -54,10 +54,10 @@ class CategoryRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'title.required' => 'عنوان التصنيف مطلوب.',
-            'title.string' => 'عنوان التصنيف يجب أن يكون نصاً.',
-            'title.max' => 'عنوان التصنيف يجب ألا يتجاوز 255 حرفاً.',
-            'title.unique' => 'عنوان التصنيف مستخدم بالفعل.',
+            'required' => 'حقل :attribute مطلوب.',
+            'string' => 'حقل :attribute يجب أن يكون نصاً.',
+            'max' => 'حقل :attribute يجب ألا يتجاوز :max حرفاً.',
+            'unique' => 'هذا :attribute مستخدم بالفعل.',
         ];
     }
 }

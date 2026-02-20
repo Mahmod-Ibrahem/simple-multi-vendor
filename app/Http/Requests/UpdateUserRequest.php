@@ -29,6 +29,9 @@ class UpdateUserRequest extends FormRequest
             'password' => ['sometimes', 'nullable', Password::defaults()],
             'role' => ['sometimes', 'string'],
             'is_active' => ['sometimes', 'boolean'],
+            'phone' => ['nullable', 'string', 'max:20', Rule::unique('users')->ignore($userId)],
+            'logo' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif,webp', 'max:2048'],
+            'brief_description' => ['nullable', 'string', 'max:1000'],
         ];
     }
 
@@ -46,6 +49,14 @@ class UpdateUserRequest extends FormRequest
             'email.unique' => 'البريد الإلكتروني مستخدم بالفعل',
             'role.string' => 'الدور يجب أن يكون نصاً',
             'role.in' => 'الدور غير صالح',
+            'phone.string' => 'رقم الهاتف يجب أن يكون نصاً',
+            'phone.max' => 'رقم الهاتف يجب ألا يتجاوز 20 حرفاً',
+            'phone.unique' => 'رقم الهاتف مستخدم بالفعل',
+            'logo.image' => 'يجب أن يكون الشعار صورة',
+            'logo.mimes' => 'يجب أن تكون الصورة بصيغة: jpeg, png, jpg, gif, webp',
+            'logo.max' => 'يجب ألا يتجاوز حجم الصورة 2 ميجابايت',
+            'brief_description.string' => 'الوصف المبسط يجب أن يكون نصاً',
+            'brief_description.max' => 'الوصف المبسط يجب ألا يتجاوز 1000 حرفاً',
         ];
     }
 }

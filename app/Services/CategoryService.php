@@ -109,9 +109,9 @@ class CategoryService
         try {
             DB::beginTransaction();
 
-            // Check if category has letters
-            if ($category->letters()->exists()) {
-                throw new \Exception('لا يمكن حذف التصنيف لارتباطه بكتب موجودة.');
+            // Check if category has products
+            if ($category->products()->exists()) {
+                throw new \Exception('لا يمكن حذف التصنيف لارتباطه بمنتجات موجودة.');
             }
 
             $deleted = $category->delete();
